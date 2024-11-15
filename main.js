@@ -5,33 +5,26 @@ const fs = require('fs');
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse incoming form data
 app.use(express.urlencoded({ extended: true }));
 
-// Serve the HTML file
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Handle form submission
 app.post('/create-clip', (req, res) => {
     const { url, start, end } = req.body;
-
-    // For now, simply print the form data to the console
     console.log(`YouTube URL: ${url}`);
     console.log(`Start Time: ${start}`);
     console.log(`End Time: ${end}`);
 
-    // Send a response back to the user
-    // res.send(`Clip request received for ${url} from ${start} to ${end}`);
-    // Command to download a specific portion of the video using yt-dlp
-    const outputFilename = "out"
+    const outputFilename = "out.mp4"
 
-    const command = `yt-dlp --http-chunk-size 10M --socket-timeout 120 --download-sections "*${start}-${end}" "${url}" -o "clip_%(id)s.%(ext)s"`;
+    const command = `yt-dlp --remux-video mp4 --download-sections "*${start}-${end}" "${url}" -o "${outputFilename}"`;
+    
     exec(command, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error: ${error.message}`);
-            return res.status(500).send('An error occurred while creating the clip');
+            // return res.status(500).send('An error occurred while creating the clip');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);

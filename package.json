@@ -12,8 +12,15 @@
     "@distube/ytdl-core": "^4.15.1",
     "expres": "^0.0.5",
     "express": "^4.21.1",
+    "ffmpeg": "^0.0.4",
+    "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.3",
+    "nodemon": "^3.1.7",
+    "socket.io": "^4.8.1",
+    "undici": "^6.21.0",
     "youtube-dl": "^3.5.0",
+    "youtube-dl-exec": "^3.0.10",
+    "youtube-stream-url": "^2.4.3",
     "ytdl": "^1.4.1",
     "ytdl-core": "^4.11.5"
   }
